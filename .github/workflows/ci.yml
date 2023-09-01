@@ -1,0 +1,17 @@
+name: Testing
+on: push
+
+jobs:
+  test_project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.11.4
+      - name: Install dependencies
+        run: |
+          pip install --user django
+      - name: Run Django unit tests
+        run: |
+          python3 manage.py test
