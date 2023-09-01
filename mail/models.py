@@ -3,7 +3,8 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    def is_valid_user(self):
+        return len(self.username) > 0 and len(self.password) > 0
 
 
 class Email(models.Model):
@@ -27,3 +28,5 @@ class Email(models.Model):
             "read": self.read,
             "archived": self.archived
         }
+    def is_valid_email(self):
+        return len(self.subject) > 0 and len(self.body) > 0 and self.sender and self.recipients
